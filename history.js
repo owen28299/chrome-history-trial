@@ -64,7 +64,7 @@ getUrl(function(url, title){
     type: "GET",
     url: "http://127.0.0.1:3000/data/" + terms,
     success: function(data) {
-      console.log(data);
+      myHistory.innerHTML = data.best;
     }
   });
 
