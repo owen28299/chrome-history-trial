@@ -1,0 +1,19 @@
+{
+  "name": "All History",
+  "version": "1.0",
+  "description": "Reads your history",
+  "permissions": [
+    "history",
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "unlimitedStorage",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_popup": "history.html",
+    "default_icon": "clock.png"
+  },
+  "manifest_version": 2
+}
