@@ -4,6 +4,11 @@ var myHistory = document.getElementById('topmatch');
 
 myHistory.innerHTML = "This will be your top match";
 
+myHistory.addEventListener("click", function(event){
+  console.log(event.target.href);
+  chrome.tabs.create({url : event.target.href});
+});
+
 var microsecondsPerWeek = 1000 * 60 * 60 * 24 * 30;
 var oneWeekAgo = (new Date).getTime() - microsecondsPerWeek;
 
@@ -65,6 +70,7 @@ getUrl(function(url, title){
     url: "http://127.0.0.1:3000/data/" + terms,
     success: function(data) {
       myHistory.innerHTML = data.best;
+      myHistory.href = data.best;
     }
   });
 
