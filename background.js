@@ -1,3 +1,6 @@
+'use strict';
+
+//sends history to backend on installation
 chrome.runtime.onInstalled.addListener(function(data){
   if(data.reason === "install"){
     var microsecondsPerWeek = 1000 * 60 * 60 * 24 * 30;
@@ -38,4 +41,33 @@ chrome.runtime.onInstalled.addListener(function(data){
 
     });
   }
+});
+
+//get information before navigation
+chrome.webNavigation.onBeforeNavigate.addListener(function(data) {
+  var queryInfo = {
+    active: true,
+    currentWindow: true
+  };
+
+  chrome.tabs.query(queryInfo, function(tabs) {
+    console.log("URL", tabs);
+  });
+});
+
+//sends activity data.
+chrome.webNavigation.onCommitted.addListener(function(data) {
+
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:3000/activity",
+    dataType: 'json',
+    data: {
+      committedData: data
+    },
+    success: function(data) {
+
+    }
+  });
+
 });
