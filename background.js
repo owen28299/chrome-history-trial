@@ -43,20 +43,24 @@ chrome.runtime.onInstalled.addListener(function(data){
   }
 });
 
-//get information before navigation
-chrome.webNavigation.onBeforeNavigate.addListener(function(data) {
-  var queryInfo = {
-    active: true,
-    currentWindow: true
-  };
+// //get information before navigation
+// chrome.webNavigation.onBeforeNavigate.addListener(function(data) {
+//   var queryInfo = {
+//     active: true,
+//     currentWindow: true
+//   };
 
-  chrome.tabs.query(queryInfo, function(tabs) {
-    console.log("URL", tabs);
-  });
-});
+//   chrome.tabs.query(queryInfo, function(tabs) {
+//     if(tabs[0].title){
+//       console.log("URL", tabs[0].title);
+//     }
+//   });
+// });
 
 //sends activity data.
 chrome.webNavigation.onCommitted.addListener(function(data) {
+
+  console.log("activity", data);
 
   $.ajax({
     type: "POST",
@@ -71,3 +75,21 @@ chrome.webNavigation.onCommitted.addListener(function(data) {
   });
 
 });
+
+chrome.webRequest.onCompleted.addListener(function(data){
+
+  console.log("query", data);
+
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:3000/query",
+    dataType: 'json',
+    data: {
+      committedData: data
+    },
+    success: function(data) {
+
+    }
+  });
+
+}, {urls: ["*://www.google.com/search?*"], types: ['xmlhttprequest']});

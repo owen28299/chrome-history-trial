@@ -17,6 +17,9 @@ function getUrl(callback){
   };
 
   chrome.tabs.query(queryInfo, function(tabs) {
+    console.log(tabs[0]);
+    console.log(tabs[0].url);
+    console.log(tabs[0].title);
     callback(tabs[0].url, tabs[0].title);
   });
 

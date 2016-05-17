@@ -5,9 +5,9 @@
   "permissions": [
     "history",
     "activeTab",
-    "https://ajax.googleapis.com/",
     "unlimitedStorage",
     "webNavigation",
+    "webRequest",
     "http://*/*",
     "https://*/*"
   ],
@@ -18,7 +18,7 @@
   "options_page": "options.html",
   "manifest_version": 2,
   "background": {
-    "persistent": false,
+    "persistent": true,
     "scripts": ["jquery.js", "background.js"]
   }
 }
